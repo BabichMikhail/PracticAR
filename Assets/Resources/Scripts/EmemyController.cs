@@ -26,7 +26,6 @@ public class EmemyController : MonoBehaviour
         for (var i = 0; i < EnemyCount; ++i)
         {
             int idx = Random.Range(0, respawns.Count);
-            Debug.Log(idx);
             var respawn = respawns[idx];
             enemies.Add(Instantiate(EnemyPrefab, respawn.transform));
         }
