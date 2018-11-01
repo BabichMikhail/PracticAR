@@ -6,7 +6,7 @@ public class DragonController : MonoBehaviour
 {
 	private NavMeshAgent agent;
     private Animator animator;
-    private GameObject camera;
+    private GameObject mainCamera;
     private GameObject bulletContainer;
 
     public GameObject Bullet;
@@ -20,15 +20,15 @@ public class DragonController : MonoBehaviour
 	{
 		agent = gameObject.GetComponent<NavMeshAgent>();
         animator = gameObject.GetComponentInChildren<Animator>();
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         bulletContainer = GameObject.FindGameObjectWithTag("BulletContainer");
 
         Debug.Assert(bulletContainer != null);
         Debug.Assert(animator != null);
         Debug.Assert(agent != null);
-        Debug.Assert(camera != null);
+        Debug.Assert(mainCamera != null);
 
-        initCameraPosition = camera.transform.position;
+        initCameraPosition = mainCamera.transform.position;
         initPersonPosition = gameObject.transform.position;
 	}
 
@@ -69,6 +69,6 @@ public class DragonController : MonoBehaviour
 
         animator.SetBool("Run", deltaPosition != Vector3.zero);            
         agent.SetDestination(transform.position + deltaPosition);
-        camera.transform.position = transform.position - initPersonPosition + initCameraPosition;
+        mainCamera.transform.position = transform.position - initPersonPosition + initCameraPosition;
     }
 }
