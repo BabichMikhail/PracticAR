@@ -42,8 +42,8 @@ public class DragonController : MonoBehaviour
             flatCameraVector.y = 0;
             // Применение классической матрицы поворота: x' = x * cos(a) - y * sin(a); y' = y * cos(a) + x * sin(a);
             var angle = Mathf.Deg2Rad * Vector3.Angle(flatCameraVector.normalized, Vector3.forward);
-            move.x = baseMove.x * Mathf.Cos(angle) - baseMove.z * Mathf.Sin(angle);
-            move.z = baseMove.z * Mathf.Cos(angle) + baseMove.x * Mathf.Sin(angle);
+            move.x = baseMove.z * Mathf.Cos(angle) + baseMove.x * Mathf.Sin(angle);
+            move.z = baseMove.x * Mathf.Cos(angle) - baseMove.z * Mathf.Sin(angle);
             move *= Scale;
         }
         return move;
@@ -52,9 +52,9 @@ public class DragonController : MonoBehaviour
 	public void Update()
 	{
         var deltaPosition =
-            HandleMove("w", new Vector3(1, 0, 0)) +
+            HandleMove("w", new Vector3(-1, 0, 0)) +
             HandleMove("a", new Vector3(0, 0, 1)) +
-            HandleMove("s", new Vector3(-1, 0, 0)) +
+            HandleMove("s", new Vector3(1, 0, 0)) +
             HandleMove("d", new Vector3(0, 0, -1));
         
         if (Input.GetKey("q"))
