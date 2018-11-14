@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class DragonController : MonoBehaviour
 {
@@ -8,25 +9,37 @@ public class DragonController : MonoBehaviour
     private Animator animator;
     private GameObject mainCamera;
     private GameObject bulletContainer;
+    private Text HealthText;
 
     public GameObject Bullet;
+    public GameObject HealthField;
 
     private Vector3 initPersonPosition;
     private Vector3 initCameraPosition;
+    private int initialHealth;
 
     public float Scale;
+    public int Health;
 
-	private void Start ()
+    private void Awake()
+    {
+        initialHealth = Health;
+    }
+
+    private void Start()
 	{
 		agent = gameObject.GetComponent<NavMeshAgent>();
         animator = gameObject.GetComponentInChildren<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         bulletContainer = GameObject.FindGameObjectWithTag("BulletContainer");
+        HealthText = HealthField.GetComponent<Text>();
 
         Debug.Assert(bulletContainer != null);
         Debug.Assert(animator != null);
         Debug.Assert(agent != null);
         Debug.Assert(mainCamera != null);
+        Debug.Assert(HealthText != null);
+        Debug.Assert(Health > 0);
 
         initCameraPosition = mainCamera.transform.position;
         initPersonPosition = gameObject.transform.position;
@@ -51,6 +64,8 @@ public class DragonController : MonoBehaviour
 
 	public void Update()
 	{
+        HealthText.text = (Health * 100 / initialHealth).ToString() + "%";
+
         var deltaPosition =
             HandleMove("w", new Vector3(1, 0, 0)) +
             HandleMove("a", new Vector3(0, 0, 1)) +
