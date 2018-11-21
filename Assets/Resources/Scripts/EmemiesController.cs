@@ -15,7 +15,6 @@ public class EmemiesController : MonoBehaviour
 {
     public GameObject EnemyPositionContainer;
     public GameObject[] EnemyPrefabs;
-    public int EnemyCount;
     public GameObject Target;
 
     private readonly List<GameObject> respawns = new List<GameObject>();
@@ -58,14 +57,10 @@ public class EmemiesController : MonoBehaviour
                 ++unitWaveIndex;
             lastSendUnitTime = now - Random.Range(0, SEND_UNIT_INTERVAL / 3);
         }
-
-        for (var i = 0; i < enemies.Count; ++i)
-            enemies[i].GetComponent<NavMeshAgent>().SetDestination(Target.transform.position);
     }
 
     private void SendUnit(int respawnIndex)
     {
-        Debug.Log(UNIT_WAVES[unitWaveIndex].second);
         for (var i = 0; i < UNIT_WAVES[unitWaveIndex].second; ++i)
         {
             var respawn = respawns[respawnIndex];

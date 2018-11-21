@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BulletContainer
+  - Person
   layers:
   - Default
   - TransparentFX

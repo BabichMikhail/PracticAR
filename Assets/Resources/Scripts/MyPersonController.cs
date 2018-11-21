@@ -17,8 +17,8 @@ public class MyPersonController : MonoBehaviour
 
     private void Start ()
     {
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        animator = gameObject.GetComponentInChildren<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         bulletContainer = GameObject.FindGameObjectWithTag("BulletContainer");
 
