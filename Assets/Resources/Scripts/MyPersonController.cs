@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor;
 
-public class DragonController : MonoBehaviour
+public class MyPersonController : MonoBehaviour
 {
-	private NavMeshAgent agent;
+    private NavMeshAgent agent;
     private Animator animator;
     private GameObject mainCamera;
     private GameObject bulletContainer;
@@ -16,9 +15,9 @@ public class DragonController : MonoBehaviour
 
     public float Scale;
 
-	private void Start ()
-	{
-		agent = gameObject.GetComponent<NavMeshAgent>();
+    private void Start ()
+    {
+        agent = gameObject.GetComponent<NavMeshAgent>();
         animator = gameObject.GetComponentInChildren<Animator>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         bulletContainer = GameObject.FindGameObjectWithTag("BulletContainer");
@@ -30,7 +29,7 @@ public class DragonController : MonoBehaviour
 
         initCameraPosition = mainCamera.transform.position;
         initPersonPosition = gameObject.transform.position;
-	}
+    }
 
     private Vector3 HandleMove(string keyCode, Vector3 baseMove)
     {
@@ -49,14 +48,14 @@ public class DragonController : MonoBehaviour
         return move;
     }
 
-	public void Update()
-	{
+    public void Update()
+    {
         var deltaPosition =
             HandleMove("w", new Vector3(-1, 0, 0)) +
             HandleMove("a", new Vector3(0, 0, 1)) +
             HandleMove("s", new Vector3(1, 0, 0)) +
             HandleMove("d", new Vector3(0, 0, -1));
-        
+
         if (Input.GetKey("q"))
         {
             var newBullet = Instantiate(Bullet, bulletContainer.transform);
@@ -67,7 +66,7 @@ public class DragonController : MonoBehaviour
             bulletController.velocity = transform.forward;
         }
 
-        animator.SetBool("Run", deltaPosition != Vector3.zero);            
+        animator.SetBool("Run", deltaPosition != Vector3.zero);
         agent.SetDestination(transform.position + deltaPosition);
         mainCamera.transform.position = transform.position - initPersonPosition + initCameraPosition;
     }

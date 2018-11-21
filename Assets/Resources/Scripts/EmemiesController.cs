@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,17 +11,17 @@ public class MyIntTuple
     public MyIntTuple(int first, int second, int third) { this.first = first; this.second = second; this.third = third; }
 }
 
-public class EmemyController : MonoBehaviour
+public class EmemiesController : MonoBehaviour
 {
     public GameObject EnemyPositionContainer;
     public GameObject[] EnemyPrefabs;
     public int EnemyCount;
     public GameObject Target;
 
-    private List<GameObject> respawns = new List<GameObject>();
-    private List<GameObject> enemies = new List<GameObject>();
+    private readonly List<GameObject> respawns = new List<GameObject>();
+    private readonly List<GameObject> enemies = new List<GameObject>();
 
-	void Start ()
+    private void Start ()
     {
         for (int i = 0; i < EnemyPrefabs.Length; ++i)
             if (EnemyPrefabs[i].GetComponent<NavMeshAgent>() == null)
@@ -35,7 +34,7 @@ public class EmemyController : MonoBehaviour
     }
 
     // time in milliseconds, unit count, respawn index
-    private List<MyIntTuple> UNIT_WAVES = new List<MyIntTuple>() {
+    private readonly List<MyIntTuple> UNIT_WAVES = new List<MyIntTuple>() {
         new MyIntTuple(1, 1, 1),
         new MyIntTuple(3000, 2, 0),
         new MyIntTuple(23000, 1, 1),
@@ -46,9 +45,9 @@ public class EmemyController : MonoBehaviour
     private float lastIncreaseMoneyTime;
     private int unitWaveIndex = 0;
     private int lastSendUnitTime = -1000;
-    public const int SEND_UNIT_INTERVAL = 200;
+    private const int SEND_UNIT_INTERVAL = 200;
 
-    void Update()
+    private void Update()
     {
         int now = (int)((Time.time - startedAt) * 1000);
         if (lastSendUnitTime + SEND_UNIT_INTERVAL < now && unitWaveIndex < UNIT_WAVES.Count && UNIT_WAVES[unitWaveIndex].first <= now)
@@ -64,7 +63,7 @@ public class EmemyController : MonoBehaviour
             enemies[i].GetComponent<NavMeshAgent>().SetDestination(Target.transform.position);
     }
 
-    void SendUnit(int respawnIndex)
+    private void SendUnit(int respawnIndex)
     {
         Debug.Log(UNIT_WAVES[unitWaveIndex].second);
         for (var i = 0; i < UNIT_WAVES[unitWaveIndex].second; ++i)

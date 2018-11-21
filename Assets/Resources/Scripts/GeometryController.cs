@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Geometry : MonoBehaviour
+public class GeometryController : MonoBehaviour
 {
     public GameObject Prefab;
     public int CountRound;
@@ -13,10 +13,10 @@ public class Geometry : MonoBehaviour
     private List<GameObject> RoundObjects = new List<GameObject>();
     private List<float> Angles = new List<float>();
 
-	private void Start ()
+    private void Start ()
     {
-        float step = 360 / (float)CountRound;
-	    for (int i = 0; i < CountRound; ++i)
+        var step = 360 / (float)CountRound;
+        for (var i = 0; i < CountRound; ++i)
         {
             var obj = Instantiate(Prefab, gameObject.transform);
             var angle = step * i + Random.Range(0, (float)step / 4);
@@ -27,9 +27,9 @@ public class Geometry : MonoBehaviour
             RoundObjects.Add(obj);
             Angles.Add(angle);
         }
-	}
-	
-	private void Update ()
+    }
+
+    private void Update ()
     {
         var deltaAngle = Time.deltaTime * Speed;
         for (var i = 0; i < CountRound; ++i)

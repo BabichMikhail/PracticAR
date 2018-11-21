@@ -12,10 +12,10 @@ public class BulletController : MonoBehaviour
         createdAt = Time.time;
     }
 
-    void Update()
+    private void Update()
     {
         if (Time.time - createdAt > lifetime)
             Destroy(gameObject);
         transform.position += Time.deltaTime * velocity;
-	}
+    }
 }
