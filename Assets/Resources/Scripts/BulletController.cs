@@ -2,7 +2,7 @@
 
 public class BulletController : MonoBehaviour
 {
-    private float lifetime = 5;
+    private float lifetime = 10;
     private float createdAt;
 
     public Vector3 velocity;
