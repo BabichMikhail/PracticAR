@@ -5307,7 +5307,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -6779,15 +6779,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4426057040827280, guid: 1d2c6670233642f42a7b4c31bafce661, type: 2}
       propertyPath: m_LocalScale.x
-      value: 4.000002
+      value: 1.557161
       objectReference: {fileID: 0}
     - target: {fileID: 4426057040827280, guid: 1d2c6670233642f42a7b4c31bafce661, type: 2}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 1.557161
       objectReference: {fileID: 0}
     - target: {fileID: 4426057040827280, guid: 1d2c6670233642f42a7b4c31bafce661, type: 2}
       propertyPath: m_LocalScale.z
-      value: 4.000002
+      value: 1.557161
       objectReference: {fileID: 0}
     - target: {fileID: 1621038925132134, guid: 1d2c6670233642f42a7b4c31bafce661, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -8285,7 +8285,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3251d1b9f858e2746a7cd413de7c5a58, type: 2}
+  - {fileID: 2100000, guid: d2afc4e41b29770469ff9592aaceacbc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -7,13 +7,15 @@ public class MyPersonController : MonoBehaviour
     private Animator animator;
     private GameObject mainCamera;
     private GameObject bulletContainer;
+    private float lastFireTime;
 
-    public GameObject Bullet;
 
     private Vector3 initPersonPosition;
     private Vector3 initCameraPosition;
 
     public float Scale;
+    public float fireSpeed = 5;
+    public GameObject Bullet;
 
     private void Start ()
     {
@@ -56,14 +58,16 @@ public class MyPersonController : MonoBehaviour
             HandleMove("s", new Vector3(1, 0, 0)) +
             HandleMove("d", new Vector3(0, 0, -1));
 
-        if (Input.GetKey("q"))
+        if (Input.GetKey("q") && lastFireTime + 1 / fireSpeed < Time.time)
         {
-            var newBullet = Instantiate(Bullet, bulletContainer.transform);
-            newBullet.transform.position = transform.position;
-            newBullet.SetActive(true);
-            var bulletController = newBullet.GetComponent<BulletController>();
-            Debug.Assert(bulletController != null);
-            bulletController.velocity = transform.forward;
+            lastFireTime = Time.time;
+            var velocity = transform.forward;
+            var bullet = Instantiate(Bullet, bulletContainer.transform);
+            bullet.transform.position = transform.position;
+
+            var bulletController = bullet.GetComponent<BulletController>();
+            bulletController.velocity = velocity.normalized;
+            bulletController.creator = gameObject;
         }
 
         animator.SetBool("Run", deltaPosition != Vector3.zero);

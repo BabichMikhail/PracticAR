@@ -6,10 +6,14 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     private GameObject targetObject;
+    private GameObject bulletContainer;
+    private float lastFireTime;
 
     public float FireDistance;
+    public GameObject BulletObject;
+    public float fireSpeed = 3;
 
-    private void Start ()
+    private void Start()
     {
         // Получаем Animator у объекта, агента и находим цель с тэгом Person.
         // Person - тэг на нашем персонаже.
@@ -19,10 +23,15 @@ public class EnemyController : MonoBehaviour
         Debug.Assert(targetObject != null);
         agent = GetComponent<NavMeshAgent>();
         Debug.Assert(agent != null);
+        bulletContainer = GameObject.FindGameObjectWithTag("BulletContainer");
+        Debug.Assert(bulletContainer != null);
     }
 
-    private void Update ()
+    private void Update()
     {
+        if (targetObject == null)
+            return;
+
         // Сбрасываем все флаги аниматора и бега.
         animator.SetBool("Idle", false);
         animator.SetBool("Run", false);
@@ -39,7 +48,18 @@ public class EnemyController : MonoBehaviour
         else
         {
             animator.SetBool("Shoot", true);
-            // TODO
+            if (lastFireTime + 1 / fireSpeed < Time.time)
+            {
+                lastFireTime = Time.time;
+                var velocity = targetObject.transform.position - transform.position;
+                var bullet = Instantiate(BulletObject, bulletContainer.transform);
+                bullet.transform.position = transform.position;
+                
+                bullet.transform.LookAt(targetObject.transform);
+                var bulletController = bullet.GetComponent<BulletController>();
+                bulletController.velocity = velocity.normalized;
+                bulletController.creator = gameObject;
+            }
         }
 
         if (enableAgent)
@@ -49,6 +69,5 @@ public class EnemyController : MonoBehaviour
             transform.LookAt(targetObject.transform);
             agent.SetDestination(transform.position);
         }
-        
     }
 }
