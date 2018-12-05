@@ -27,9 +27,7 @@ public class EmemiesController : MonoBehaviour
                 Debug.LogWarning("Missing NavMeshAgent");
 
         for (var i = 0; i < EnemyPositionContainer.transform.childCount; ++i)
-        {
             respawns.Add(EnemyPositionContainer.transform.GetChild(i).gameObject);
-        }
     }
 
     // time in milliseconds, unit count, respawn index
@@ -48,7 +46,7 @@ public class EmemiesController : MonoBehaviour
 
     private void Update()
     {
-        int now = (int)((Time.time - startedAt) * 1000);
+        var now = (int)((Time.time - startedAt) * 1000);
         if (lastSendUnitTime + SEND_UNIT_INTERVAL < now && unitWaveIndex < UNIT_WAVES.Count && UNIT_WAVES[unitWaveIndex].first <= now)
         {
             SendUnit(UNIT_WAVES[unitWaveIndex].third);
