@@ -2237,7 +2237,7 @@ RectTransform:
   m_GameObject: {fileID: 246640232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1013086268}
   m_Father: {fileID: 699896306}
@@ -2720,7 +2720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftJoystickBackgroundImage: {fileID: 1396639545}
   rightJoystickBackgroundImage: {fileID: 246640233}
-  leftJoystickAlwaysVisible: 0
+  leftJoystickAlwaysVisible: 1
   rightJoystickAlwaysVisible: 0
 --- !u!4 &378480576
 Transform:
@@ -8177,10 +8177,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1607385271798318, guid: 1c8edaed8055b2244a3bb7440ebe5304, type: 2}
-      propertyPath: m_Name
-      value: Person
-      objectReference: {fileID: 0}
     - target: {fileID: 114394629380683544, guid: 1c8edaed8055b2244a3bb7440ebe5304,
         type: 2}
       propertyPath: LeftJoystick
@@ -8191,6 +8187,30 @@ Prefab:
       propertyPath: RightJoystick
       value: 
       objectReference: {fileID: 246640233}
+    - target: {fileID: 1607385271798318, guid: 1c8edaed8055b2244a3bb7440ebe5304, type: 2}
+      propertyPath: m_Name
+      value: Person
+      objectReference: {fileID: 0}
+    - target: {fileID: 114243171396799278, guid: 1c8edaed8055b2244a3bb7440ebe5304,
+        type: 2}
+      propertyPath: leftJoystick
+      value: 
+      objectReference: {fileID: 1396639543}
+    - target: {fileID: 114243171396799278, guid: 1c8edaed8055b2244a3bb7440ebe5304,
+        type: 2}
+      propertyPath: rightJoystick
+      value: 
+      objectReference: {fileID: 246640234}
+    - target: {fileID: 114243171396799278, guid: 1c8edaed8055b2244a3bb7440ebe5304,
+        type: 2}
+      propertyPath: rotationTarget
+      value: 
+      objectReference: {fileID: 1233209378}
+    - target: {fileID: 114243171396799278, guid: 1c8edaed8055b2244a3bb7440ebe5304,
+        type: 2}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1233209377}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c8edaed8055b2244a3bb7440ebe5304, type: 2}
   m_IsPrefabAsset: 0
@@ -9074,7 +9094,7 @@ RectTransform:
   m_GameObject: {fileID: 1396639541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1807835886}
   m_Father: {fileID: 699896306}
@@ -9082,7 +9102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 0}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1396639543
@@ -11981,23 +12001,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473256427081318, guid: 1c8edaed8055b2244a3bb7440ebe5304,
     type: 2}
   m_PrefabInternal: {fileID: 1220348966}
---- !u!114 &1950843757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1950843755}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b570ede5c64831a4980668d66d2b0f28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftJoystick: {fileID: 1396639543}
-  rightJoystick: {fileID: 246640234}
-  moveSpeed: 4
-  rotationSpeed: 8
-  rotationTarget: {fileID: 1233209378}
-  animator: {fileID: 1233209377}
 --- !u!1001 &1952177800
 Prefab:
   m_ObjectHideFlags: 0

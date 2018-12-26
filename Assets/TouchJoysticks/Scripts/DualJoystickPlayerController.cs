@@ -8,39 +8,18 @@ public class DualJoystickPlayerController : MonoBehaviour
     public int rotationSpeed = 8; // rotation speed of the player character
     public Transform rotationTarget; // the game object that will rotate to face the input direction
     public Animator animator; // the animator controller of the player character
+
     private Vector3 leftJoystickInput; // holds the input of the Left Joystick
     private Vector3 rightJoystickInput; // hold the input of the Right Joystick
     private Rigidbody rigidBody; // rigid body component of the player character
 
     void Start()
     {
-        if (transform.GetComponent<Rigidbody>() == null)
-        {
-            Debug.LogError("A RigidBody component is required on this game object.");
-        }
-        else
-        {
-            rigidBody = transform.GetComponent<Rigidbody>();
-        }
-
-        if (leftJoystick == null)
-        {
-            Debug.LogError("The left joystick is not attached.");
-        }
-
-        if (rightJoystick == null)
-        {
-            Debug.LogError("The right joystick is not attached.");
-        }
-
-        if (rotationTarget == null)
-        {
-            Debug.LogError("The target rotation game object is not attached.");
-        }
-    }
-
-    void Update()
-    {
+        rigidBody = transform.GetComponent<Rigidbody>();
+        Debug.Assert(rigidBody != null);
+        Debug.Assert(leftJoystick != null);
+        Debug.Assert(rightJoystick != null);
+        Debug.Assert(rotationTarget != null);
     }
 
     void FixedUpdate()
@@ -84,13 +63,9 @@ public class DualJoystickPlayerController : MonoBehaviour
             temp.z += zMovementLeftJoystick;
             Vector3 lookDirection = temp - transform.position;
             if (lookDirection != Vector3.zero)
-            {
                 rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection), rotationSpeed * Time.deltaTime);
-            }
             if (animator != null)
-            {
                 animator.SetBool("isRunning", true);
-            }
 
             // move the player
             rigidBody.transform.Translate(leftJoystickInput * Time.fixedDeltaTime);
@@ -110,9 +85,7 @@ public class DualJoystickPlayerController : MonoBehaviour
             temp.z += zMovementRightJoystick;
             Vector3 lookDirection = temp - transform.position;
             if (lookDirection != Vector3.zero)
-            {
                 rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection) * Quaternion.Euler(0, 45f, 0), rotationSpeed * Time.deltaTime);
-            }
 
             animator.SetBool("isAttacking", true);
         }
@@ -131,9 +104,7 @@ public class DualJoystickPlayerController : MonoBehaviour
             temp.z += zMovementRightJoystick;
             Vector3 lookDirection = temp - transform.position;
             if (lookDirection != Vector3.zero)
-            {
                 rotationTarget.localRotation = Quaternion.Slerp(rotationTarget.localRotation, Quaternion.LookRotation(lookDirection) * Quaternion.Euler(0, 45f, 0), rotationSpeed * Time.deltaTime);
-            }
 
             animator.SetBool("isAttacking", true);
 
@@ -142,16 +113,12 @@ public class DualJoystickPlayerController : MonoBehaviour
             xMovementLeftJoystick *= Mathf.Abs(Mathf.Cos(tempAngleLeftJoystick));
             zMovementLeftJoystick *= Mathf.Abs(Mathf.Sin(tempAngleLeftJoystick));
 
-            leftJoystickInput = new Vector3(xMovementLeftJoystick, 0, zMovementLeftJoystick);
-            leftJoystickInput = transform.TransformDirection(leftJoystickInput);
-            leftJoystickInput *= moveSpeed;
 
             if (animator != null)
-            {
                 animator.SetBool("isRunning", true);
-            }
 
             // move the player
+            leftJoystickInput = transform.TransformDirection(new Vector3(xMovementLeftJoystick, 0, zMovementLeftJoystick)) * moveSpeed;
             rigidBody.transform.Translate(leftJoystickInput * Time.fixedDeltaTime);
         }
     }
